@@ -5,7 +5,7 @@ import os
 PATH = os.path.dirname(os.path.abspath(__file__))
 class HashTable(object):
     '''blizzard hashtable'''
-    def __init__(self, hashtable_lenght=2**24):
+    def __init__(self, hashtable_lenght=2**24):#hashtable_lengh always means the total count of words in your vocabulary, 2**24==16777216 as default!
         self.dll_path = os.path.join(PATH, 'data', 'blizzard_dll.dll')
         self.dll = cdll.LoadLibrary(self.dll_path)
         self.initialize_hashtable(hashtable_lenght)
@@ -24,8 +24,8 @@ class HashTable(object):
         add.argtypes = [c_char_p, c_int]
         add.restype = c_int
         add_sucess = add(val, self.pos_of_hashtable)
-        if add_sucess == -1:
-            raise ValueError('the param %s fail to add... '%val)
+        if add_sucess == 0:#add option failed, means that hashtable_lengh is not long enough...
+            raise ValueError('hash table not long enough, please larger your hashtable_lengh param...')
 
     def check_exists(self, val):
         '''check if val in hash table'''
