@@ -77,6 +77,8 @@ class SlicerBase(object):
         # complexWords = complexWords
         point_posttion = len(complexWords)
         new_position = point_posttion - MAX_LEN
+        if new_position < 0:
+            new_position = 0
         splited_setence_list = deque()
         while point_posttion - new_position >= 1:
             point_complex_words = complexWords[new_position:point_posttion]
