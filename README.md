@@ -1,6 +1,9 @@
-blizzard-hash-slicer
+blizzard-hash-slicer（data中词表为裁剪后词表）
 ====================
+1、http_server 请求格式：
 
+	Usage: http://127.0.0.1:5000/?text=your sentence here
+	
 暴雪哈希表作为存储的切词算法
 
 usage: python test.py slicer sentence
@@ -20,3 +23,9 @@ slicer_using_python_set 使用python自带存储哈希结构：set
 最大词长:MAXLEN = 8
 
 切词速度:1743.63KB/s
+====================
+linux平台编译.so文件：
+
+command = r'gcc blizzard_hash_linux.c -fPIC -shared -o data/blizzard_hash.so'
+
+os.system(command)
