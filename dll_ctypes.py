@@ -7,7 +7,8 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 class HashTable(object):
     '''blizzard hashtable'''
     def __init__(self, hashtable_lenght=2**24):
-        self.dll_path = os.path.join(PATH, 'data', 'blizzard_dll.dll')
+        # self.dll_path = os.path.join(PATH, 'data', 'blizzard_dll.dll')# platfor of winodows
+        self.dll_path = os.path.join(PATH, 'data', 'blizzard_hash.so')# platfor of linux
         self.dll = cdll.LoadLibrary(self.dll_path)
         self.initialize_hashtable(hashtable_lenght)
         self._initialize_add_param()
