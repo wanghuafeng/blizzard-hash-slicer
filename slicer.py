@@ -19,10 +19,11 @@ class SlicerBase(object):
             options = {}
         self.options = options
         if not self.options.has_key('vocab_file') or not self.options['vocab_file']:
-            self.options['vocab_file'] = os.path.join(PATH, 'data', 'Cizu_and_singleword_komoxo95K.txt')
+            self.options['vocab_file'] = os.path.join(PATH, 'data', 'combine_words.txt')
         self._load_base_wordlist()
 
     def _load_base_wordlist(self):
+        #self.options['vocab_file'] = 'F:\klm\wordservice\data\combine_words.txt'
         with codecs.open(self.options['vocab_file'], encoding='utf-8') as f:
             # total_base_word_set = set([item.split('\t')[0] for item in f.readlines()])
             for line in f.readlines():

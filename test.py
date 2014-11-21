@@ -42,6 +42,19 @@ def test_socket_server():
 
     reactor.connectTCP(HOST, PORT, TSClntFactory())
     reactor.run()
-
+def test_slicer_speed():
+    import codecs
+    import time
+    from slicer import SlicerBase
+    slicer = SlicerBase()
+    filename = r'E:\cuted_varify_sentence_pinyin_role.txt'
+    with codecs.open(filename, encoding='utf-8') as f:
+        sentence_list = [item.split('\t')[0] for item in f.readlines()]
+        start_time = time.time()
+        for sentence in sentence_list:
+            slicer.slice(sentence)
+        time_interval = time.time() - start_time
+        print time_interval
+        print 74375.0/time_interval
 if __name__ == '__main__':
     test_http_server()

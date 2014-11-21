@@ -11,7 +11,7 @@ usage: python test.py slicer sentence
 
 最大词长:MAXLEN = 8
 
-切词速度:223.32KB/s
+切词速度:4697.17.32KB/s
 
 ***************************************
 
