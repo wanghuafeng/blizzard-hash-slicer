@@ -8,10 +8,15 @@ from twisted.internet import protocol, reactor
 PATH = os.path.dirname(os.path.abspath(__file__))
 
 def test_http_server():
-    '''Usage: http://127.0.0.1:5000/?text=your sentence here'''
-    host = 'http://192.168.0.254:5000/'
-    locathost = '127.0.0.1:5000'
+    '''post and get method'''
+    host = 'http://192.168.0.254:5000'
+    # host = 'http://127.0.0.1:5000/'
+    #***************get_method**************
     html = requests.get('%s?text=%s'%(host, 'helloworld'))
+    print html.text
+    #***********post_method***************
+    post_data = {u'text':u'helloworld'}
+    html = requests.post(host, data=post_data)
     print html.text
 
 def test_socket_server():
@@ -39,4 +44,4 @@ def test_socket_server():
     reactor.run()
 
 if __name__ == '__main__':
-    test_socket_server()
+    test_http_server()

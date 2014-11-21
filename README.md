@@ -1,8 +1,5 @@
 blizzard-hash-slicer（data中词表为裁剪后词表）
 ====================
-1、http_server 请求格式：
-
-	Usage: http://127.0.0.1:5000/?text=your sentence here
 	
 暴雪哈希表作为存储的切词算法
 

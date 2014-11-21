@@ -27,14 +27,17 @@ def to_utf8(sentence):
 
 @app.route('/',methods=['GET', 'POST'])
 def slicer_services():
-    sentence = request.args.get('text')
-    if not sentence:
-        usage_info = "Usage: http://192.168.0.254:5000/?text='your sentence here'"
-        return simplejson.dumps(usage_info)
-    sentence = to_utf8(sentence)
+    if request.method == 'POST':
+        sentence = request.form.get('text')
+        if not sentence:
+            return "post param error"
+    else:
+        sentence = request.args.get('text')
+        if not sentence:
+            return 'get param error'
     splied_words_list = slicebase.slice(sentence)
     return simplejson.dumps(splied_words_list)
-
 if __name__ == '__main__':
     # app.debug = True
-    app.run()
+    host = '0.0.0.0'
+    app.run(host=host)
