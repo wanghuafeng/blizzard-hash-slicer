@@ -20,7 +20,7 @@ slicer_using_python_set 使用python自带存储哈希结构：set
 最大词长:MAXLEN = 8
 
 切词速度:1743.63KB/s
-====================
+
 linux平台编译.so文件：
 
 command = r'gcc blizzard_hash_linux.c -fPIC -shared -o data/blizzard_hash.so'
