@@ -6,9 +6,11 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 class HashTable(object):
     '''blizzard hashtable'''
-    def __init__(self, hashtable_lenght=2**24):
-        # self.dll_path = os.path.join(PATH, 'data', 'blizzard_dll.dll')# platfor of winodows
-        self.dll_path = os.path.join(PATH, 'data', 'blizzard_hash.so')# platfor of linux
+    def __init__(self, hashtable_lenght=2**22):
+        self.dll_path = os.path.join(PATH, 'data', 'blizarrd_hashA_hashB.dll')# platfor of winodows
+        # self.dll_path = os.path.join(PATH, 'data', 'blizzard_hash.so')# platfor of linux
+        # self.dll_path = os.path.join(r'F:\c_project\blizarrd_hashA_hashB\x64\Debug', 'blizarrd_hashA_hashB.dll')
+        # self.dll_path = os.path.join(r'F:\c_project\blizza_crash\x64\Debug', 'blizza_crash.dll')
         self.dll = cdll.LoadLibrary(self.dll_path)
         self.initialize_hashtable(hashtable_lenght)
         self._initialize_add_param()
@@ -27,25 +29,25 @@ class HashTable(object):
     def _initialize_add_param(self):
         '''initialize add param by ctypes'''
         self.fun_add = self.dll.MPQHashTableAdd
-        self.fun_add.argtypes = [c_void_p, c_void_p]
+        self.fun_add.argtypes = [c_char_p, c_void_p]
         self.fun_add.restype = c_uint
 
     def _initialize_checkExists_param(self):
         '''initialize checkExists param by ctypes'''
         self.fun_check_exist = self.dll.MPQHashTableIsExist
-        self.fun_check_exist.argtypes = [c_void_p, c_void_p]
+        self.fun_check_exist.argtypes = [c_char_p, c_void_p]
         self.fun_check_exist.restype = c_long
 
     def add(self, val):
         '''add value to hash table'''
-        add_sucess = self.fun_add(cast(val, c_char_p), self.pos_of_hashtable)
+        add_sucess = self.fun_add(val, self.pos_of_hashtable)
         if add_sucess == 0:
             raise ValueError('hash table not long enough, please enlarge your hashtable_lengh param...')
 
     def check_exists(self, val):
         '''check if val in hash table'''
-        IsExists = self.fun_check_exist(cast(val, c_char_p), self.pos_of_hashtable)
-        return IsExists != -1
+        IsExists = self.fun_check_exist(val, self.pos_of_hashtable)
+        return IsExists
 
 if __name__ == "__main__":
     def test():
@@ -56,19 +58,11 @@ if __name__ == "__main__":
         # print 't2 before add...'
         hashtable.add('引表')
         # print 't2 end add...'
-        isexists = hashtable.check_exists('引')
-        print isexists
+        isexists = hashtable.check_exists('引表')
+        if isexists:
+            print 'yes'
+        else:
+            print 'not in hash'
     test()
-    import codecs
-    import time
-    def test_words_in_file():
-        hastable = HashTable()
-        filename = os.path.join(os.path.dirname(__file__), 'data', 'combine_words.txt')
-        with codecs.open(filename) as f:
-            for line in f.readlines():#[:1155]:
-                words = line.split('\t')[0]
-                hastable.add(words)
-        isexists = hastable.check_exists('表引表引表表引表引表')
-        print isexists
-    # test_words_in_file()
+
 

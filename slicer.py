@@ -7,7 +7,7 @@ from collections import deque
 
 from dll_ctypes import HashTable
 
-MAX_LEN = 8
+MAX_LEN = 16
 try:
     PATH = os.path.dirname(os.path.abspath(__file__))
 except:
@@ -27,7 +27,7 @@ class SlicerBase(object):
         with codecs.open(self.options['vocab_file']) as f:
             for line in f.readlines():
                 splited_line = line.split('\t')
-                words = splited_line[0]
+                words = splited_line[0].upper()
                 self.hash_table.add(words)
 
     def to_unicode(self, sentence):
@@ -115,12 +115,13 @@ class SlicerBase(object):
             return min(cut_backward_list, cut_forward_list, key=lambda x:len(x))
         else:
             return cut_backward_list
+
 if __name__ == "__main__":
     def test():
         cp = SlicerBase()
-        sentence = '龙城大街西封装大街西'
-        # print ' '.join(cp.cut_backwords(sentence))
-        # print ' '.join(cp.cut_forward(sentence))
+        sentence = '海豚是人类在海洋里的最好的盆友'
+        print ' '.join(cp.cut_backwords(sentence))
+        print ' '.join(cp.cut_forward(sentence))
         print ' '.join(cp.slice(sentence))
         # print cp.hash_table.check_exists(sentence)
     test()

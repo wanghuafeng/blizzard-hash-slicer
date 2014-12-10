@@ -172,7 +172,7 @@ EXPORT long MPQHashTableIsExist(char *lpszString, char *pHashTable)
 		if (((_pHashTable + nHashPos)->nHashA == nHashA) && 
 			((_pHashTable + nHashPos)->nHashB == nHashB))
 		{
-			return nHashPos;
+			return 1;
 		}
 		else
 		{
@@ -183,7 +183,7 @@ EXPORT long MPQHashTableIsExist(char *lpszString, char *pHashTable)
 			break;
 		}
 	}
-	return -1;
+	return 0;
 }
 
 void test()

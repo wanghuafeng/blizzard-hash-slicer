@@ -11,8 +11,8 @@
 
 typedef struct {
 
-	long nHashA;
-	long nHashB;
+	unsigned long nHashA;
+	unsigned long nHashB;
 	unsigned int bExists;
 }MPQHASHTABLE;
 
